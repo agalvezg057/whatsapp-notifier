@@ -3,12 +3,9 @@ services:
     build:
       context: ./ 
       dockerfile: Dockerfile
-    container_name: barberstudio_whatsapp
-    ports:
-      - "3000:3000"
-    # Solo borra los locks, no recrea la carpeta
+    container_name: amagisa-whatsapp
     command: >
-      sh -c "rm -f /usr/src/app/sessions/barber-session/Singleton* &&
+      sh -c "rm -f /usr/src/app/sessions/whatsapp-session/Singleton* &&
              node index.js"
     volumes:
       - ./sessions:/usr/src/app/sessions   # Sesiones persistentes en el host
