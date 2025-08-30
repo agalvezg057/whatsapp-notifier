@@ -1,0 +1,18 @@
+services:
+  whatsapp:
+    build:
+      context: ./ 
+      dockerfile: Dockerfile
+    container_name: amagisa-whatsapp
+    command: >
+      sh -c "rm -f /usr/src/app/sessions/whatsapp-session/Singleton* &&
+             node index.js"
+    volumes:
+      - ./sessions:/usr/src/app/sessions   # Sesiones persistentes en el host
+    networks:
+      - amagisa_net
+    restart: unless-stopped
+
+networks:
+  amagisa_net:
+    external: true
