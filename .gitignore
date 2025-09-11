@@ -1,2 +1,4 @@
 node_modules/
 sessions/
+docker-compose.devWhatsapp.yml
+main.dev.js
