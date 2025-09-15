@@ -1,14 +1,21 @@
+# docker-compose.whatsapp.ymlgit
+
 services:
   whatsapp:
     build:
-      context: ./ 
+      context: ./
       dockerfile: Dockerfile
     container_name: amagisa-whatsapp
     command: >
-      sh -c "rm -f /usr/src/app/sessions/whatsapp-session/Singleton* &&
-             node index.js"
-    volumes:
-      - ./sessions:/usr/src/app/sessions   # Sesiones persistentes en el host
+      sh -c "node index.js"
+    deploy:
+      resources:
+        limits:
+          memory: 600M
+    environment:
+      # Variables que Puppeteer usará para headless y shm
+      PUPPETEER_HEADLESS: "true"
+      PUPPETEER_DISABLE_DEV_SHM: "true"
     networks:
       - amagisa_net
     restart: unless-stopped
